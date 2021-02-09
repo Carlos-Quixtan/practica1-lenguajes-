@@ -12,6 +12,7 @@ nombresListas = []
 nombreOrdenar = []
 
 numeros_desordenados =[]  # contiene la lista de lista con numeros desordenados 
+numeros_desordenados_2 =[]  # contiene la lista de lista con numeros desordenados 
 
 posiciones =[] # contiene las posiciones donde esta la palabra ordenar en todo el archivo <------- OJO sirve para filtrar con "ORDENAR"
                 # es una lista simple 
@@ -20,6 +21,7 @@ nombres_listas_filtro_ordenar = [] # contiene los nombres de las listas donde es
                                     # es una lista simple
 
 numeros_desordenados_filtro_ordenar = [] # contiene los numeros desordenados donde esta la palabra ORDENAR    <------ SI resultado
+
 
 numeros_ordenados_filtro_ordenar = [] # contiene los numeros ordenados donde esta la palabra ORDENAR    <------ SI resultado
 
@@ -73,7 +75,7 @@ def desplegarListaOrdenada():
             contador2 = contador2 + 1
 
     
-    print(posiciones)
+    #print(posiciones)
 
     # -----------------------------------------# busca el nombre de la lista --------------------------------------------------------
 
@@ -96,7 +98,7 @@ def desplegarListaOrdenada():
         else:
             cont1 = cont1 + 1
 
-    print(nombres_listas_filtro_ordenar)
+    #print(nombres_listas_filtro_ordenar)
     # ['DATOS=', 'LISTA=', 'DATOS=', 'LISTA=', 'DATOS=', 'LISTA=']
 
    #------------------------------------  lista de lista con numeros desordenados ---------------------------------------------------
@@ -105,7 +107,7 @@ def desplegarListaOrdenada():
 
     for i in listaSinSaltos:
         valor = re.findall(pattern4, i)   # busco lo que coincide con el pattern
-        numeros_desordenados.append(valor)  # ingreso ya ordenados los numeros a una lista de lista
+        numeros_desordenados.append(valor)  # ingreso desordenados los numeros a una lista de lista
 
     ###################################################
      # ----------> #numeros_desordenados_filtro_ordenar <---- contiene los numeros de las listas filtrado por el nombre BUSCAR
@@ -123,7 +125,7 @@ def desplegarListaOrdenada():
         else:
             cont2 = cont2 + 1
 
-    print(numeros_desordenados_filtro_ordenar) 
+    #print(numeros_desordenados_filtro_ordenar) 
 
 
     #-------------------------------------------------------------ordeno la lista de numeros--------------------------------------------
@@ -132,57 +134,55 @@ def desplegarListaOrdenada():
 
     for i in listaSinSaltos:
         # busco lo que coincide con el pattern
-        valor = re.findall(pattern, i)
-        
+        valor1 = re.findall(pattern, i)
+    
     #########################   sirve para ordenar ya la lista #################################
 
-        for recorrido in range(1,len(valor)):
-            for posicion in range(len(valor)- recorrido):
-                if int(valor[posicion]) > int(valor[posicion + 1]):
-                    temp = valor[posicion]
-                    valor[posicion]=valor[posicion + 1]
-                    valor[posicion + 1 ] = temp
+        for recorrido in range(1,len(valor1)):
+            for posicion in range(len(valor1)- recorrido):
+                if int(valor1[posicion]) > int(valor1[posicion + 1]):
+                    temp = valor1[posicion]
+                    valor1[posicion]=valor1[posicion + 1]
+                    valor1[posicion + 1 ] = temp
         
-        numeros.append(valor)  # ingreso ya ordenados los numeros a una lista de lista
-    print("")
-    print("")
-    print(numeros)   # (eliminar ) solo era para probar 
+        numeros.append(valor1)  # ingreso ya ordenados los numeros a una lista de lista (pero aun tienen el valor del comando BUSCAR)
+                                # y aun no estan filtrados por la palabra ORDENAR
+
+    ##################### filtro los odenados y quito el valor de buscar######################    
+
+    pattern5 = r"(\d+)"     # busca los numeros de la lista
+
+    for i in listaSinSaltos:
+        valor2 = re.findall(pattern5, i)   # busco lo que coincide con el pattern
+        numeros_desordenados_2.append(valor2)  # ingreso desordenados los numeros a una lista de lista
     
-    """cont3 = 0
-    while cont3 < len(nombreOrdenar):
-        if cont3 in posiciones:
-            if "BUSCAR" in listaSinSaltos[cont3]:
-                numeros[cont3].pop()
-                numeros_ordenados_filtro_ordenar.append(numeros[cont3])
+    ###################################################
+     # ----------> #numeros_ordenados_filtro_ordenar <---- contiene los numeros ordenados de las listas filtrado (ya es la respuesta)
+    ###################################################
+   
+    cont3 = 0
+    while cont3 < len(nombreOrdenar):   # esto solo es un ciclo
+        if cont3 in posiciones:       # si posicion cont 3 esta en la lista de posiciones que tienen la palabra ordenar
+            if "BUSCAR" in listaSinSaltos[cont3]:  # si la palabra buscar esta en la fila entonces quito su valor
+                numero_de_buscar = numeros_desordenados_2[cont3][-1] # adquiero el ultimo valor de la lista para despues usar en remove
+                numeros[cont3].remove(numero_de_buscar)  # retiro de la lista numeros el valor de la variable numero_de_buscar
+                numeros_ordenados_filtro_ordenar.append(numeros[cont3]) # agrego a la lista ya filtrado y sin numero de buscar
                 cont3 = cont3 + 1
             else:
                 numeros_ordenados_filtro_ordenar.append(numeros[cont3])
                 cont3 = cont3 + 1
         else:
             cont3 = cont3 + 1
-    print("")
-    print("")
 
-    print(numeros_ordenados_filtro_ordenar)"""
-
+    #print(numeros_ordenados_filtro_ordenar)
 
     #------------------------------------  imprimo respuesta de desplegar listas ordenadas --------------------------------------------
 
-    '''   esto si sirve   alsljasdjiajsildjijeijdioqjoiwjdoijqiojiodqjwiodjqojwdoijqowidjoqiwjdoijqwiojdojqwoidjioqwjd
     contador = 0
 
-    while contador < len(nombresListas):
-        print(str(nombresListas[contador][0]) +str(" ") + str(numeros_desordenados[contador]) + "   Resultado de ordenar: " + str(numeros[contador]))
+    while contador < len(nombres_listas_filtro_ordenar):
+        print(str(nombres_listas_filtro_ordenar[contador]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador]))
         print("")
         contador = contador + 1  
-    '''
-    
-
-    '''for i in nombreOrdenar:
-                for j in i:
-                    if j == "ORDENAR":           
-                        numeros_desordenados.append(valor)
-                    else:
-                        continue'''
 
     
