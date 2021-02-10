@@ -22,8 +22,23 @@ nombres_listas_filtro_ordenar = [] # contiene los nombres de las listas donde es
 
 numeros_desordenados_filtro_ordenar = [] # contiene los numeros desordenados donde esta la palabra ORDENAR    <------ SI resultado
 
-
 numeros_ordenados_filtro_ordenar = [] # contiene los numeros ordenados donde esta la palabra ORDENAR    <------ SI resultado
+#-------------------------------------------------------------------------------------------------------------------------------------
+posicionesbuscar =[] # contiene las posiciones donde esta la palabra buscar en todo el archivo <------- OJO sirve para filtrar con "BUSCAR"
+                # es una lista simple 
+nombres_listas_filtro_buscar = []
+
+nombreBuscar = [] 
+
+nombresListas2 = []
+
+numeros_desordenados2 = []
+
+numero_con_el_que_voy_a_buscar = []
+
+numeros_desordenados3 = []
+
+numeros_desordenados_filtro_buscar = []
 
 def cargar():
     try:
@@ -185,4 +200,147 @@ def desplegarListaOrdenada():
         print("")
         contador = contador + 1  
 
+
+
+def encontrar_numero ():
+        # -----------------------------------------# busca la palabra buscar -----------------------------------------------------------
+    pattern6 = r"(BUSCAR)"   # busca la palabra buscar
+    for i in listaSinSaltos:
+        # busco lo que coincide con el pattern6
+        listaOrdenada2 = re.findall(str(pattern6), i)
+        if listaOrdenada2:
+            nombreBuscar.append(list(listaOrdenada2))
+        else:
+            nombreBuscar.append(list("f"))  # agrego una f en la posicion donde no este la palabra buscar 
+                                             #(para que me sirva para saltar esa posicion y no encontrar el valor de buscar)
+    #print(nombreBuscar)
+
+    # -----------------------------------------# lista con posiciones donde esta la palabra BUSCAR ---------------------------------
+    contador0 = 0
     
+    while contador0 < len(nombreBuscar):
+        if nombreBuscar[contador0][0] == "BUSCAR":
+            posicionesbuscar.append(int(contador0))     # variable posicionesbuscar me contiene las posiciones de la palabra BUSCAR
+            contador0 = contador0 + 1
+        else:
+            contador0 = contador0 + 1
+
+    print(posicionesbuscar)
+    
+        # -----------------------------------------# busca el nombre de la lista --------------------------------------------------------
+
+    pattern7 = r"(\w+\=)"    # busca el nombre de la lista
+    for i in listaSinSaltos:
+        # busco lo que coincide con el pattern1
+        valorNamess = re.findall(str(pattern7), i) # esta variable solo me almacena el nombre de la lista para despues ingresar a la lista
+        nombresListas2.append(valorNamess)  # ingreso a una lista de lista
+    #print(nombresListas2)
+    
+    ###################################################
+    # ----------------> #nombres_listas_filtro_buscar <---- contiene los nombres de las listas donde esta la palabra BUSCAR
+    ###################################################
+
+    cont1 = 0
+    while cont1 < len(nombreBuscar):
+        if cont1 in posicionesbuscar:
+            nombres_listas_filtro_buscar.append(nombresListas2[cont1][0])
+            cont1 = cont1 + 1
+        else:
+            cont1 = cont1 + 1
+
+    #print(nombres_listas_filtro_buscar)
+    # ['LISTA=', 'La=', 'LISTA=', 'La=', 'La=', 'LISTA=', 'holaaaaaaa=']
+
+
+    #------------------------------------  lista simple con los numeros que que voy a buscar ---------------------------------------------------
+
+    pattern8 = r"(\d+)"     # busca los numeros de la lista
+
+    for i in listaSinSaltos:
+        valor = re.findall(pattern8, i)   # busco lo que coincide con el pattern
+        numeros_desordenados2.append(valor)  # ingreso desordenados los numeros a una lista de lista
+
+    ###################################################
+     # ----------> #numero_con_el_que_voy_a_buscar <---- contiene los numeros con los qu voy a ejecutar la opcion de buscar 
+    ###################################################
+    cont2 = 0
+    while cont2 < len(nombreBuscar):
+        if cont2 in posicionesbuscar:
+            if "BUSCAR" in listaSinSaltos[cont2]:
+                numero_buscado = numeros_desordenados2[cont2][-1]
+                numero_con_el_que_voy_a_buscar.append(numero_buscado)
+                cont2 = cont2 + 1
+            else:
+                cont2 = cont2 + 1
+        else:
+            cont2 = cont2 + 1
+
+    print("")
+    print("estos son los numeros que le pertenecen a cada comando de buscar")
+    print(numero_con_el_que_voy_a_buscar) 
+
+
+   #------------------------------------  lista de lista con numeros desordenados sin el numero de BUSCAR ---------------------------------------------------
+
+    patterN9 = r"(\d+)"     # busca los numeros de la lista
+
+    for i in listaSinSaltos:
+        valor = re.findall(patterN9, i)   # busco lo que coincide con el pattern
+        numeros_desordenados3.append(valor)  # ingreso desordenados los numeros a una lista de lista
+
+    ###################################################
+     # ----------> #numeros_desordenados_filtro_buscar <---- contiene los numeros de las listas filtrado por el nombre BUSCAR
+    ###################################################
+    cont2 = 0
+    while cont2 < len(nombreBuscar):
+        if cont2 in posicionesbuscar:
+            if "BUSCAR" in listaSinSaltos[cont2]:
+                numeros_desordenados3[cont2].pop()  # quito el numero excedente que le pertece al opcion de buscar
+                numeros_desordenados_filtro_buscar.append(numeros_desordenados3[cont2])  # agrego el que ya no tiene el numero excedente
+                cont2 = cont2 + 1
+            else:
+                numeros_desordenados_filtro_buscar.append(numeros_desordenados3[cont2])
+                cont2 = cont2 + 1
+        else:
+            cont2 = cont2 + 1
+    print("")
+    print(numeros_desordenados_filtro_buscar) 
+    print("")
+    print("")
+
+    
+     #------------------------------------  lista que contiene las posiciones donde esta el numero buscado ---------------------------------------------------
+    
+    cont3 = 0
+    while cont3 < len(numero_con_el_que_voy_a_buscar):  # esto me sirve para repetir el numero de elementos que tiene la lista
+# cont3 = me sirve para recorrer cada elemento que contiene mi lista de numeros a buscar y con estos comparar si se encuentra en las listas
+        contt2 = 0
+        while contt2 < len(numeros_desordenados_filtro_buscar[cont3]): # se va repetir el numero de elementos que tenga esa posicion
+                                                            # con esto aseguro que se van a valuar todos los numeros de dicha posicion 
+            if numeros_desordenados_filtro_buscar[cont3][contt2] == numero_con_el_que_voy_a_buscar[cont3]: # valuo si el valor .....->
+                    # es igual al elemento que tiene mi lista de numeros buscados en ese momento 
+                print(" si esta en la posicion: " + str(contt2))
+                contt2 = contt2 + 1   # con esto lo que hago es pasar al otro numero de mi elemnto 
+            else:
+                
+                contt2 = contt2 + 1 
+        print("---------------------------------------------------------------")
+        cont3 = cont3 + 1  # con esto paso al otro numero de mi lista y asi ya valuar con este la segunda lista
+
+
+
+  
+
+            
+    
+    #print("")
+    #print(len(numeros_desordenados_filtro_buscar[0]))
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 from funciones import cargar
 from funciones import desplegarListaOrdenada
+from funciones import encontrar_numero 
 
 print("-------------------------------------------------------")
 print("PRACTICA 1")
@@ -29,7 +30,7 @@ while True:
 
     elif datoIngresado ==3:
         print("-------------------------------------------------------")
-
+        encontrar_numero()
         print("-------------------------------------------------------")
 
     elif datoIngresado ==4:
