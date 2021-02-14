@@ -1,0 +1,35 @@
+digraph grafica{
+
+
+
+elementos[shape = box]
+
+node[shape = triangle, style=filled,color = lightblue];
+
+frutas [shape=polygon,sides=5,peripheries=3,color=lightblue, style=filled, label = "limon"];
+
+elementos[color = blue]
+formales[color = red]
+formales -> elementos;
+elementos -> lenguajes;
+lenguajes -> frutas
+
+
+}
+
+#con digraph es un grafo dirigido
+#con graph es un grafo no dirigido
+
+
+#graph grafica{
+
+#elementos[shape = box]
+#elementos[color = blue]
+#formales[color = red]
+#formales -- elementos 
+#elementos -- lenguajes
+#lenguajes -- formales
+
+#}
+
+

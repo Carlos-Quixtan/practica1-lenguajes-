@@ -40,6 +40,10 @@ numeros_desordenados3 = []
 
 numeros_desordenados_filtro_buscar = []
 
+lista_de_encontrados =[]
+
+lista_de_encontrados_final = []
+
 def cargar():
     try:
         root = Tk()
@@ -197,7 +201,6 @@ def desplegarListaOrdenada():
 
     while contador < len(nombres_listas_filtro_ordenar):
         print(str(nombres_listas_filtro_ordenar[contador]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador]))
-        print("")
         contador = contador + 1  
 
 
@@ -225,7 +228,7 @@ def encontrar_numero ():
         else:
             contador0 = contador0 + 1
 
-    print(posicionesbuscar)
+    #print(posicionesbuscar)
     
         # -----------------------------------------# busca el nombre de la lista --------------------------------------------------------
 
@@ -275,9 +278,9 @@ def encontrar_numero ():
         else:
             cont2 = cont2 + 1
 
-    print("")
-    print("estos son los numeros que le pertenecen a cada comando de buscar")
-    print(numero_con_el_que_voy_a_buscar) 
+    #print("")
+    #print("estos son los numeros que le pertenecen a cada comando de buscar")
+    #print(numero_con_el_que_voy_a_buscar) 
 
 
    #------------------------------------  lista de lista con numeros desordenados sin el numero de BUSCAR ---------------------------------------------------
@@ -303,10 +306,10 @@ def encontrar_numero ():
                 cont2 = cont2 + 1
         else:
             cont2 = cont2 + 1
-    print("")
-    print(numeros_desordenados_filtro_buscar) 
-    print("")
-    print("")
+    #print("")
+    #print(numeros_desordenados_filtro_buscar) 
+    #print("")
+    #print("")
 
     
      #------------------------------------  lista que contiene las posiciones donde esta el numero buscado ---------------------------------------------------
@@ -314,33 +317,66 @@ def encontrar_numero ():
     cont3 = 0
     while cont3 < len(numero_con_el_que_voy_a_buscar):  # esto me sirve para repetir el numero de elementos que tiene la lista
 # cont3 = me sirve para recorrer cada elemento que contiene mi lista de numeros a buscar y con estos comparar si se encuentra en las listas
+        lista_de_encontrados =[]
         contt2 = 0
         while contt2 < len(numeros_desordenados_filtro_buscar[cont3]): # se va repetir el numero de elementos que tenga esa posicion
                                                             # con esto aseguro que se van a valuar todos los numeros de dicha posicion 
             if numeros_desordenados_filtro_buscar[cont3][contt2] == numero_con_el_que_voy_a_buscar[cont3]: # valuo si el valor .....->
                     # es igual al elemento que tiene mi lista de numeros buscados en ese momento 
-                print(" si esta en la posicion: " + str(contt2))
+                lista_de_encontrados.append(contt2) 
                 contt2 = contt2 + 1   # con esto lo que hago es pasar al otro numero de mi elemnto 
             else:
                 
                 contt2 = contt2 + 1 
-        print("---------------------------------------------------------------")
-        cont3 = cont3 + 1  # con esto paso al otro numero de mi lista y asi ya valuar con este la segunda lista
 
-
-
-  
-
+        #print(lista_de_encontrados)
+        #print("se agrego el valor a la lista")
+        lista_de_encontrados_final.append("encontrado en: " + str(lista_de_encontrados))
             
+        #lista_de_encontrados_final.append(lista_de_encontrados)
+        cont3 = cont3 + 1 
+   
+
+
+    #print("se finalizo la busqueda")
     
-    #print("")
-    #print(len(numeros_desordenados_filtro_buscar[0]))
+    contadorrr = 0
+
+    while contadorrr < len(lista_de_encontrados_final):
+        if lista_de_encontrados_final[contadorrr] == "encontrado en: []":
+            lista_de_encontrados_final[contadorrr] = "No encontrado"
+            contadorrr +=1
+        else:
+            contadorrr += 1
+    #print(lista_de_encontrados_final)
+
+    #------------------------------------  imprimo respuesta de desplegar busqueda -------------------------------------------------------
+
+    contador = 0
+
+    while contador < len(numeros_desordenados_filtro_buscar):
+        print(str(nombres_listas_filtro_buscar[contador]) +str(" ") + str(numeros_desordenados_filtro_buscar[contador]) + "   valor buscado: " + str(numero_con_el_que_voy_a_buscar[contador]) + "  " + str(lista_de_encontrados_final[contador]))
+        contador = contador + 1 
 
 
 
 
+def cargarTodo():
+
+    contador1 = 0
+
+    while contador1 < len(nombres_listas_filtro_ordenar):
+        print(str(nombres_listas_filtro_ordenar[contador1]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador1]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador1]))
+        contador1 = contador1 + 1  
+
+    contador = 0
+
+    while contador < len(numeros_desordenados_filtro_buscar):
+        print(str(nombres_listas_filtro_buscar[contador]) +str(" ") + str(numeros_desordenados_filtro_buscar[contador]) + "   valor buscado: " + str(numero_con_el_que_voy_a_buscar[contador]) + "  " + str(lista_de_encontrados_final[contador]))
+        contador = contador + 1 
 
 
 
 
+        
 
