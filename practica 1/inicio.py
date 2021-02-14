@@ -2,6 +2,7 @@ from funciones import cargar
 from funciones import desplegarListaOrdenada
 from funciones import encontrar_numero 
 from funciones import cargarTodo
+from funciones import datosHTML
 
 
 
@@ -43,7 +44,7 @@ while True:
 
     elif datoIngresado ==5:
         print("-------------------------------------------------------")
-
+        datosHTML()
         print("-------------------------------------------------------")
     
     else:

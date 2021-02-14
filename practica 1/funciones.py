@@ -369,6 +369,8 @@ def cargarTodo():
         print(str(nombres_listas_filtro_ordenar[contador1]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador1]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador1]))
         contador1 = contador1 + 1  
 
+    print()
+
     contador = 0
 
     while contador < len(numeros_desordenados_filtro_buscar):
@@ -376,7 +378,56 @@ def cargarTodo():
         contador = contador + 1 
 
 
+#-----------------------------------------------------  FUNCION PARA DATOSHTML -----------------------------------------------------------  
+def tabla():
+    texto=""
+    contador1 = 0
+
+    while contador1 < len(nombres_listas_filtro_ordenar):
+        texto+="<tr>"
+        texto+="<td>"+ str(str(nombres_listas_filtro_ordenar[contador1]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador1]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador1]))+"</td>"
+        texto+="</tr>"
+        contador1 = contador1 + 1  
+
+    contador = 0
+
+    while contador < len(numeros_desordenados_filtro_buscar):
+        texto+="<tr>"
+        texto+="<td>"+ str(str(nombres_listas_filtro_buscar[contador]) +str(" ") + str(numeros_desordenados_filtro_buscar[contador]) + "   valor buscado: " + str(numero_con_el_que_voy_a_buscar[contador]) + "  " + str(lista_de_encontrados_final[contador]))+"</td>"
+        texto+="</tr>"
+        contador = contador + 1 
+
+    return(texto)
 
 
-        
+def datosHTML():
+    import webbrowser
+    funcion= open("tarea.html", "wb")
+    abrir = """<html>
+    <head>
+    <meta charset="utf8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>Registros</title>
+
+
+
+    </head>
+
+    <body>
+        <h1>Los datos son:</h1>
+        <div class="container">
+            <table class="table">"""
+    abrir+= tabla()
+
+    abrir+="""
+            
+            </table>
+    </div>
+    </body>
+    </html>"""
+    
+    funcion.write(bytes(abrir, "ascii"))
+    funcion.close()
+    webbrowser.open_new_tab("tarea.html") 
 
