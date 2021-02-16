@@ -1,0 +1,52 @@
+body{
+    background-image: url(img/fondooo.jpg);
+    background-size: cover;
+    margin: 0%;
+    padding: 0%;
+    background-position: absolute;
+    
+}
+
+*{
+    list-style: none;
+
+}
+
+.titulo2{
+    text-align: center;    
+    padding: 0%;
+    font-size: 30px;
+    background: ghostwhite;
+    left: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#tabla{
+    background: rgba(236, 225, 225, 0.6);
+    width: 80%;
+    margin: 50px auto;
+    
+}
+
+table{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;  /* sirve para quitarle los bordes a la tabla*/
+}
+
+th,td{
+    padding: 20px;
+}
+
+thead{
+    background: rgba(250, 17, 17, 0.829);
+    border-bottom:solid black 5px;
+}
+
+tr:nth-child(even){   /* le aplico color a los hijos de la tabla (even=solo pares) */
+    background: rgba(130, 247, 255, 0.6);
+}
+tr:hover td{ /* ilumino solo los td  */
+    background:rgba(76, 73, 221, 0.6) ;
+    color: white;
+}

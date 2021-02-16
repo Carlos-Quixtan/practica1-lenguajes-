@@ -50,6 +50,12 @@ while True:
     else:
         print("-------------------------------------------------------")
         print("Gracias por usar nuestro programa")
+        print("")
+        print("")
+        print("201901159 \n")
+        print("Carlos Roberto Quixtán Pérez \n")
+        print("carlosquixtan72@gmail.com \n")
+        print("Lenguages formales  \n")
         print("-------------------------------------------------------")
         
         break

@@ -323,7 +323,7 @@ def encontrar_numero ():
                                                             # con esto aseguro que se van a valuar todos los numeros de dicha posicion 
             if numeros_desordenados_filtro_buscar[cont3][contt2] == numero_con_el_que_voy_a_buscar[cont3]: # valuo si el valor .....->
                     # es igual al elemento que tiene mi lista de numeros buscados en ese momento 
-                lista_de_encontrados.append(contt2) 
+                lista_de_encontrados.append(contt2 + 1) 
                 contt2 = contt2 + 1   # con esto lo que hago es pasar al otro numero de mi elemnto 
             else:
                 
@@ -383,6 +383,11 @@ def tabla():
     texto=""
     contador1 = 0
 
+    texto+="<tr>"
+    texto+="<td>"+ str("LISTAS ORDENADAS")+"</td>"
+    texto+="</tr>"
+
+
     while contador1 < len(nombres_listas_filtro_ordenar):
         texto+="<tr>"
         texto+="<td>"+ str(str(nombres_listas_filtro_ordenar[contador1]) +str(" ") + str(numeros_desordenados_filtro_ordenar[contador1]) + "   Resultado de ordenar: " + str(numeros_ordenados_filtro_ordenar[contador1]))+"</td>"
@@ -390,6 +395,10 @@ def tabla():
         contador1 = contador1 + 1  
 
     contador = 0
+
+    texto+="<tr>"
+    texto+="<td>"+ str("BUSQUEDA DE NUMEROS")+"</td>"
+    texto+="</tr>"
 
     while contador < len(numeros_desordenados_filtro_buscar):
         texto+="<tr>"
@@ -402,21 +411,22 @@ def tabla():
 
 def datosHTML():
     import webbrowser
-    funcion= open("tarea.html", "wb")
+    funcion= open("estadoCuentaUsu4.html", "wb")
     abrir = """<html>
     <head>
     <meta charset="utf8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <title>Registros</title>
-
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="estadoCuentaUsu4.css">
 
 
     </head>
 
     <body>
-        <h1>Los datos son:</h1>
-        <div class="container">
+        <div class="titulo2">
+        <h2>TODOS LOS ARCHIVOS</h2>
+        </div>
+        <div id="tabla">
             <table class="table">"""
     abrir+= tabla()
 
@@ -429,5 +439,5 @@ def datosHTML():
     
     funcion.write(bytes(abrir, "ascii"))
     funcion.close()
-    webbrowser.open_new_tab("tarea.html") 
+    webbrowser.open_new_tab("estadoCuentaUsu4.html") 
 
